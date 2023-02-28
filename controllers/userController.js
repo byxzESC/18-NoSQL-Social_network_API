@@ -1,4 +1,4 @@
-const { ObjectId } = require("mongoose");
+const { ObjectId } = require("mongoose").Types;
 const { User, Thought } = require("../models");
 
 module.exports = {
@@ -111,14 +111,15 @@ module.exports = {
 
   removeFriend(req, res) {
 
-    // console.log(req.params.userId, friendToDelete)
+    console.log(req.params.userId, ObjectId(req.params.friendId))
+    // come back
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $pull: { friends: { _id: req.params.friendId }  } },
+      { $pull: { friends: ObjectId(req.params.friendId)  } },
       { runValidators: true, new: true }
     )
     .then((user) => {
-      // console.log(user)
+      console.log(user)
       if (!user) {
         return res.status(404).json({ message: "user not found" });
       } else {

@@ -26,6 +26,12 @@ const userSchema = new mongoose.Schema({
       ref: "user",
     },
   ],
+},
+{
+  toJSON: {
+    virtuals: true
+  },
+  id: false,
 });
 
 userSchema.virtual('thoughtCount').get(function() {
