@@ -110,14 +110,15 @@ module.exports = {
   },
 
   removeFriend(req, res) {
-    console.log(req.params.userId, req.params.friendId)
+
+    // console.log(req.params.userId, friendToDelete)
     User.findOneAndUpdate(
       { _id: req.params.userId },
       { $pull: { friends: { _id: req.params.friendId }  } },
       { runValidators: true, new: true }
     )
     .then((user) => {
-      console.log(user)
+      // console.log(user)
       if (!user) {
         return res.status(404).json({ message: "user not found" });
       } else {
