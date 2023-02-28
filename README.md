@@ -6,19 +6,16 @@
 ![nodemon badge](https://img.shields.io/badge/TECHOLOGY-NODEMON%20@2.0.20-red)
 ![dotenv badge](https://img.shields.io/badge/TECHOLOGY-DOTENV%20@8.6.0-blue)
 ![Insomnia badge](https://img.shields.io/badge/TECHOLOGY-INSOMNIA-blueviolet)
-
-![npm mySQL2 badge](https://img.shields.io/badge/NPM-MYSQL2%20@2.3.3-orange)
-![mySQL badge](https://img.shields.io/badge/TECHOLOGY-MYSQL-blue)
-
-
+![mongodb](https://img.shields.io/badge/TECHOLOGY-MONGODB-green)
+![mongoose](https://img.shields.io/badge/TECHOLOGY-MONGOOSE-brown)
+![faker JS](https://img.shields.io/badge/TECHOLOGY-FAKER-blue)
 
 ## Description
 
-    This is a simple database for an e-commerce back end of a website. 
-    User able use this app to read, create, update, or delete to manager their
-    back end data base on categories, products, or tags tables.
+    This is simple demonstration of using mongodb for Social network API, using mongodb, 
+    mongoose, and insomnia to constructed. It also used faker JS for seeding.
 
-Here is a [Demonstration video](https://drive.google.com/file/d/1zWX6OEcXjeWGmL3kneUWIJ3rUd16ekLL/view)
+Here is a [Demonstration video](https://drive.google.com/file/d/1ESktqBgYguUnF-3ZVpdCuoN0tQ2DWUd4/view)
 
 ## Table of Contents (Optional)
 
@@ -37,23 +34,19 @@ To install necessary dependencies, run the following command:
 
 ## Usage
 
-Step 1: create a database using schema.sql in db folder with following command in your sql terminal:
+Step 1: create a noSQL database using utils/seed.js in db folder with following command in your terminal:
 
-    source ./db/schema.sql;
+    npm run seed
 
-Step 2: could use seeds folder for experimenting functions with following command in your terminal:
+Step 2: run following command in your terminal for starting the server:
 
-    node ./seeds/index.js
+    npm run start
 
-Step 3: run following command in your terminal:
-
-    node server.js
-
-step 4: use insomnia software or as such to manage the date base
+step 3: use insomnia software or as such to manage the db
 
 example:
 
-![example](./images/example.JPG)
+![example](public\images\example.JPG)
 
 ## License
 
