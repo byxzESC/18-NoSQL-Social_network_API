@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
+userSchema.virtual('thoughtCount').get(function() {
+  return this.thoughts.length;
+})
+
 userSchema.virtual('friendCount').get(function() {
   return this.friends.length;
 })

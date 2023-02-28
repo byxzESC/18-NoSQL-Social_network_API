@@ -4,6 +4,14 @@ const { User, Thought } = require("../models");
 module.exports = {
   getUsers(req, res) {
     User.find()
+    .populate({
+      path: "thoughts",
+      select: "-__v -username -createdAt",
+    })
+    .populate({
+      path: "friends",
+      select: "-__v",
+    })
       .then((userData) => {
         return res.json(userData);
       })
@@ -15,9 +23,19 @@ module.exports = {
 
   getUserById(req, res) {
     User.findOne({ _id: req.params.userId })
-      .select("-__V")
-      .populate("friends")
-      .populate("thoughts")
+      // .select("-__V")
+      .populate({
+        path: "thoughts",
+        select: "-__v",
+        populate: {
+          path: "reactions",
+          select: "-_id",
+        },
+      })
+      .populate({
+        path: "friends",
+        select: "-__v",
+      })
       .then((user) => {
         if (!user) {
           return res.status(404).json({ message: "User not found" });
@@ -31,7 +49,7 @@ module.exports = {
       });
   },
 
-  postUser(req, res) {
+  createUser(req, res) {
     User.create(req.body)
       .then((user) => res.json(user))
       .catch((err) => res.json(err));
@@ -62,6 +80,8 @@ module.exports = {
         if (!user) {
           return res.status(404).json({ message: "user not found" });
         } else {
+          // BONUS: Fulfilling the following can add 10 points to your grade.
+          // Application deletes a user's associated thoughts when the user is deleted.
           return Thought.deleteMany({ _id: { $in: user.thoughts } });
         }
       })
@@ -69,4 +89,44 @@ module.exports = {
         res.json({ message: "user associate with the id been deleted" });
       });
   },
+
+  addFriend(req, res) {
+    User.findOneAndUpdate(
+      { _id: req.params.userId},
+      { $push: { friends: req.body  } },
+      { runValidators: true, new: true }
+    )
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ message: "user not found" });
+      } else {
+        return res.status(200).json(user);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+  },
+
+  removeFriend(req, res) {
+    console.log(req.params.userId, req.params.friendId)
+    User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $pull: { friends: { _id: req.params.friendId }  } },
+      { runValidators: true, new: true }
+    )
+    .then((user) => {
+      console.log(user)
+      if (!user) {
+        return res.status(404).json({ message: "user not found" });
+      } else {
+        res.status(200).json(user)
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+  }
 };

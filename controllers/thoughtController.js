@@ -26,7 +26,7 @@ module.exports = {
       .then((thought) => {
         User.findOneAndUpdate(
           { username: req.body.username },
-          { $addToSet: { thoughts: ObjectId(thought._id) } },
+          { $addToSet: { thoughts: thought._id } },
           { new: true }
         )
         .then(() => res.status(200).json(thought));
@@ -98,7 +98,7 @@ module.exports = {
   deleteReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
-      { $pull: { reactions: { _id: req.params.reactionId } } },
+      { $pull: { reactions: { reactionId: req.params.reactionId } } },
       { runValidators: true, new: true }
     )
       .then((thought) => {

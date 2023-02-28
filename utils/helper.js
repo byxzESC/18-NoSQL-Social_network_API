@@ -1,9 +1,9 @@
-const faker = require("faker");
+const { faker } = require("@faker-js/faker");
 const { User, Thought } = require("../models");
 
 const randomUser = (users) => {
-  let user = Math.floor(Math.random() * users.length);
-  return user.username;
+  let index = Math.floor(Math.random() * users.length);
+  return index;
 };
 
 const randomReaction = (numOfReactions, users) => {
@@ -12,7 +12,7 @@ const randomReaction = (numOfReactions, users) => {
   for (let i = 0; i < numOfReactions; i++) {
     reactions.push({
       reactionBody: faker.lorem.sentence(),
-      username: randomUser(users),
+      username: users[randomUser(users)].username,
       createdAt: faker.date.past(),
     });
   }
@@ -35,15 +35,18 @@ const seedUsers = (num) => {
 
 const seedThoughts = (usersArray, numOfThoughts, numOfReactions) => {
   let result = [];
+  // console.log(usersArray)
   for (let i = 0; i < numOfThoughts * 3; i++) {
     const thought = new Thought({
       thoughtText: faker.lorem.sentence(),
       createdAt: faker.date.past(),
-      username: randomUser(usersArray),
+      username: usersArray[randomUser(usersArray)].username,
       reactions: randomReaction(numOfReactions, usersArray),
     });
+    // console.log('------\n', thought)
     result.push(thought);
-  }
+  } 
   return result;
 };
+
 module.exports = { randomUser, randomReaction, seedUsers, seedThoughts };

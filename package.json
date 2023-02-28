@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "start": "node index",
-    "dev": "nodemon index",
-    "seed": "node utils/seed",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "seed": "node utils/seed.js",
     "heroku-postbuild": "node utils/seed.js"
   },
   "dependencies": {
@@ -13,5 +13,19 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0"
-  }
+  },
+  "name": "18-nosql-social_network_api",
+  "description": "![js badge](https://img.shields.io/badge/TECHOLOGY-JAVASCRIPT%20ES6-orange)\r ![node.js badge](https://img.shields.io/badge/TECHOLOGY-NODE.JS%20V16-success)\r ![express badge](https://img.shields.io/badge/TECHOLOGY-EXPRESS%20@4.18.2-success)\r ![nodemon badge](https://img.shields.io/badge/TECHOLOGY-NODEMON%20@2.0.20-red)\r ![dotenv badge](https://img.shields.io/badge/TECHOLOGY-DOTENV%20@8.6.0-blue)\r ![Insomnia badge](https://img.shields.io/badge/TECHOLOGY-INSOMNIA-blueviolet)",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byxzESC/18-NoSQL-Social_network_API.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/byxzESC/18-NoSQL-Social_network_API/issues"
+  },
+  "homepage": "https://github.com/byxzESC/18-NoSQL-Social_network_API#readme"
 }
